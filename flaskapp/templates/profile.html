@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Your Profile</title>
+<style>
+    body { font-family: Arial, sans-serif; background: #f4f6f8; display: flex; justify-content: center; padding: 40px; }
+    .card { background: #fff; padding: 30px 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 420px; }
+    h2 { margin-top: 0; color: #2c3e50; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    td { padding: 8px 4px; border-bottom: 1px solid #eee; font-size: 14px; }
+    td.label { font-weight: bold; color: #34495e; width: 40%; }
+    .file-box { margin-top: 20px; padding: 14px; background: #ecf0f1; border-radius: 6px; }
+    .download-btn {
+        display: inline-block; margin-top: 10px; padding: 8px 16px; background: #8e44ad;
+        color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px;
+    }
+    .download-btn:hover { background: #6c3483; }
+    .back-link { display: block; text-align: center; margin-top: 20px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="card">
+    <h2>Welcome, {{ user["username"] }}</h2>
+    <table>
+        <tr><td class="label">First Name</td><td>{{ user["firstname"] }}</td></tr>
+        <tr><td class="label">Last Name</td><td>{{ user["lastname"] }}</td></tr>
+        <tr><td class="label">Email</td><td>{{ user["email"] }}</td></tr>
+        <tr><td class="label">Address</td><td>{{ user["address"] }}</td></tr>
+    </table>
+
+    {% if user["filename"] %}
+    <div class="file-box">
+        <div><strong>Uploaded file:</strong> {{ user["filename"] }}</div>
+        <div><strong>Word count:</strong> {{ user["word_count"] }}</div>
+        <a class="download-btn" href="{{ url_for('download', username=user['username']) }}">Download file</a>
+    </div>
+    {% endif %}
+
+    <a class="back-link" href="/login">Log out / Back to login</a>
+</div>
+</body>
+</html>
